@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , signup = require('./routes/signup')
   , http = require('http')
   , path = require('path');
 
@@ -34,7 +35,9 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index(Todo));
-app.get('/users', user.list);
+//app.get('/users', user.list);
+app.get('/users', user.list(Todo));
+app.get('/register', signup.register);
 app.get('/todos.json', routes.get(Todo));
 
 app.put('/todo/:id.json', routes.update(Todo));

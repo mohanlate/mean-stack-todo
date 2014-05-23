@@ -1,0 +1,19 @@
+extends layout
+
+block head
+  link(rel='stylesheet', href='/javascripts/vendor/bootstrap-css/css/bootstrap.css')
+
+  script(type='text/javascript', src='/javascripts/controllers/SignupController.js')
+
+block content
+  div.container()
+    h2 Register for Earth Eyes
+  form(ng-submit="addNewUser()")
+    input(ng-model="newUser.username", placeholder="Enter username")
+    br
+    input(ng-model="newUser.password", placeholder="Enter password")
+    br
+    input(placeholder="Re enter password")
+    br
+  button.btn.btn-primary(type="submit") Register
+

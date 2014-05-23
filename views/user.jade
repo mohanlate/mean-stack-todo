@@ -1,0 +1,19 @@
+extends layout
+
+block head
+  link(rel='stylesheet', href='/javascripts/vendor/bootstrap-css/css/bootstrap.css')
+
+  script(type='text/javascript', src='/javascripts/controllers/TodoListController.js')
+
+block content
+  div.container(ng-controller="TodoListController", ng-init="setTodos( #{JSON.stringify(todos)} )")
+    h2 Users who have been assigned tasks
+    div
+     h3 Users who are still working on tasks
+      div.row.todo.not-done(ng-repeat="todo in todos | filter:notDoneFilter")
+        div
+           {{todo.user}}
+     h3 Users who have completed their tasks 
+      div.row.todo.done(ng-repeat="todo in todos | filter:doneFilter")
+           {{todo.user}}
+
