@@ -6,14 +6,15 @@ block head
   script(type='text/javascript', src='/javascripts/controllers/SignupController.js')
 
 block content
-  div.container()
+  div.container(ng-controller="SignupController", ng-init="setUser( #{JSON.stringify(users)} )")
     h2 Register for Earth Eyes
-  form(ng-submit="addNewUser()")
-    input(ng-model="newUser.username", placeholder="Enter username")
-    br
-    input(ng-model="newUser.password", placeholder="Enter password")
-    br
-    input(placeholder="Re enter password")
-    br
-  button.btn.btn-primary(type="submit") Register
+    form(novalidate, ng-submit="addNewUser()")
+      input(ng-model="newUser.username", placeholder="Enter username")
+      br
+      input(ng-model="newUser.password", placeholder="Enter password")
+      br
+      button.btn.btn-primary(type="submit") Signup
+      br
+  div thanks
+
 

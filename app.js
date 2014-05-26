@@ -18,6 +18,10 @@ var db = Mongoose.createConnection('localhost', 'mytestapp');
 var TodoSchema = require('./models/Todo.js').TodoSchema;
 var Todo = db.model('todos', TodoSchema);
 
+var UserSchema = require('./models/User.js').UserSchema;
+var User = db.model('users', UserSchema);
+
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -36,8 +40,8 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index(Todo));
 //app.get('/users', user.list);
-app.get('/users', user.list(Todo));
-app.get('/register', signup.register);
+//app.get('/users', user.list(Todo));
+app.get('/signup', signup.register(User));
 app.get('/todos.json', routes.get(Todo));
 
 app.put('/todo/:id.json', routes.update(Todo));

@@ -1,46 +1,29 @@
 function SignupController($scope, $http) {
-  $scope.user = {};
-  $scope.newUser = {
-    username : 'mohan',
-    password : 'pwd'
-  };
 
-  $scope.setUser = function(user) {
-    $scope.user = user;
-  };
+	
+	$scope.users = [];
+  
+	$scope.newUser = {
+			username : 'mohan',
+			password : 'pwd'
+	};
 
-  $scope.update = function(user) {
-    $http.put('/user/' + user._id + '.json', user).success(function(data) {
-      if (!data.user) {
-        alert(JSON.stringify(data));
-      }
-    });
-  };
+	$scope.setUser = function(users) {
 
-/*
-  $scope.getUser = function() {
-    $http.get('/user.json').success(function(data) {
-      $scope.user = data.user;
-    });
-  };
-*/
+		$scope.users = users;
+	};
 
-/*
-  setInterval(function() {
-    $scope.updateList();
-    $scope.$apply();
-  }, 30 * 60 * 1000); // update every 30 minutes;
+	  $scope.addNewUser = function() {
+		    $http.post('/user.json', $scope.newUser).success(function(data) {
+		      if (data.user) {
+		        $scope.users.push(data.user);
+		      } else {
+		        alert(JSON.stringify(data));
+		      }
+		    });
+		  };
+	
 
-  $scope.updateList();
-*/
 
-  $scope.addNewUser = function() {
-    $http.post('/user.json', $scope.newUser).success(function(data) {
-      if (data.user) {
-        alert('Registration complete!');
-      } else {
-        alert(JSON.stringify(data));
-      }
-    });
-  };
+
 }
